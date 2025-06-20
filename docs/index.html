@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CitySpender API</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #4A90E2;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CitySpender API 🚀</h1>
+    <p>A real-world style API for city and user transaction analytics.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Upload CSV transaction data</li>
+        <li>Get city-level and user-level spend reports</li>
+        <li>Swagger docs and Postman collection included</li>
+    </ul>
+
+    <h2>Links</h2>
+    <ul>
+        <li><a href="https://github.com/YOUR_USERNAME/cityspender-api">GitHub Repo</a></li>
+        <li><a href="https://YOUR_USERNAME.github.io/cityspender-api/swagger">Swagger UI (static copy)</a></li>
+        <li><a href="CitySpender.postman_collection.json" download>Download Postman Collection</a></li>
+    </ul>
+
+    <h2>Example Usage</h2>
+    <pre><code>GET /report/city?start=2025-01-01&end=2025-06-01</code></pre>
+    <pre><code>curl -X POST -F "file=@sample.csv" http://your-api-domain/transactions/upload</code></pre>
+
+    <h2>Stack</h2>
+    <p>Node.js + Express + TypeScript + PostgreSQL + Prisma + Docker + Jest</p>
+
+    <p><small>MIT License</small></p>
+</body>
+
+</html>
