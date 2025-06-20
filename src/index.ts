@@ -20,12 +20,12 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, '../public')));
+// Serve static files from docs directory (for GitHub Pages compatibility)
+app.use(express.static(path.join(__dirname, '../docs')));
 
 // Serve landing page at root
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../docs/index.html'));
 });
 
 app.use('/report/city', cityReportRouter);

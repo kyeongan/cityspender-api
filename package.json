@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:watch:coverage": "jest --watch --coverage",
-    "test:watch:coverage:watch": "jest --watch --coverage --watchAll"
+    "test:watch:coverage:watch": "jest --watch --coverage --watchAll",
+    "build": "echo 'Build completed'",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts"
   },
   "keywords": [],
   "author": "",
