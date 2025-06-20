@@ -19,6 +19,15 @@ const swaggerDocument = YAML.load(path.join(__dirname, "../docs/swagger.yaml"));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
+
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Serve landing page at root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 app.use('/report/city', cityReportRouter);
 app.use('/health', healthRouter);
 app.use('/upload', uploadRouter);
