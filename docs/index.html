@@ -338,7 +338,7 @@
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#api">API</a>
-                <a href="#docs">Docs</a>
+                <a href="https://kyeongan.github.io/cityspender-api/docs" target="_blank">Docs</a>
                 <a href="https://github.com/kyeongan/cityspender-api" target="_blank">GitHub</a>
             </div>
         </nav>
@@ -349,8 +349,9 @@
         <div class="container">
             <h1>Smart Transaction Analytics</h1>
             <p>Powerful API for city-wide and user-specific transaction insights. Built with modern tech stack for scalability and performance.</p>
+            <p style="opacity: 0.8; font-size: 1rem; margin-bottom: 2rem;">🚀 <strong>Demo Project:</strong> This is a demonstration API showcasing modern web development practices. Clone the repository to run locally!</p>
             <div class="cta-buttons">
-                <a href="http://localhost:3000/docs" class="btn btn-primary">
+                <a href="https://github.com/kyeongan/cityspender-api" target="_blank" class="btn btn-primary">
                     <i class="fas fa-rocket"></i>
                     Get Started
                 </a>
@@ -437,6 +438,57 @@
                     <span class="endpoint-method method-post">POST</span>
                     <span class="endpoint-url">/upload</span>
                     <p>Upload transaction CSV file for data import</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Run Section -->
+    <section class="features" style="background: #f1f5f9;">
+        <div class="container">
+            <h2 class="section-title">How to Run Locally</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #1f2937; margin-bottom: 1rem;">Quick Start Guide</h3>
+                <div style="display: grid; gap: 1rem; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.9rem;">
+                    <div>
+                        <strong style="color: #4f46e5;">1. Clone the repository</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            git clone https://github.com/kyeongan/cityspender-api.git
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #4f46e5;">2. Install dependencies</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            npm install
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #4f46e5;">3. Start PostgreSQL with Docker</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            docker-compose up -d
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #4f46e5;">4. Run migrations and seed data</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            npx prisma migrate dev --name init<br>
+                            npx ts-node scripts/seed.ts
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #4f46e5;">5. Start the server</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            npm run dev
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #4f46e5;">6. Access the API</strong>
+                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            🌐 <a href="http://localhost:3000" target="_blank" style="color: #4f46e5;">Landing Page</a><br>
+                            📚 <a href="http://localhost:3000/docs" target="_blank" style="color: #4f46e5;">Swagger Documentation</a><br>
+                            🧪 <a href="http://localhost:3000/health" target="_blank" style="color: #4f46e5;">Health Check</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
