@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: CitySpender API
+  version: 1.0.0
+  description: API for city and user-level transaction analytics
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "OK"
+
+  /report/city:
+    get:
+      summary: Get city-level transaction summary
+      parameters:
+        - in: query
+          name: start
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: Start date for filtering transactions
+        - in: query
+          name: end
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: End date for filtering transactions
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                    _sum:
+                      type: object
+                      properties:
+                        amount:
+                          type: number
+                    _count:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+
+  /report/user/{user_id}:
+    get:
+      summary: Get user-level transaction report
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: User ID to get report for
+        - in: query
+          name: start
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: Start date for filtering transactions
+        - in: query
+          name: end
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: End date for filtering transactions
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: object
+                    properties:
+                      _sum:
+                        type: object
+                        properties:
+                          amount:
+                            type: number
+                      _count:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                  byMerchant:
+                    type: array
+                    items:
+                      type: object
+                  byCategory:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid parameters
+        '404':
+          description: User not found
+
+  /upload:
+    post:
+      summary: Upload transaction CSV file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file with transaction data
+      responses:
+        '201':
+          description: Upload successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inserted:
+                    type: number
+                    description: Number of records inserted
+        '400':
+          description: No file uploaded
+        '500':
+          description: Failed to parse or insert CSV

@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "d8a1e88a-1234-5678-9101-abcdef123456",
+    "name": "CitySpender API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "API collection for CitySpender analytics"
+  },
+  "item": [
+    {
+      "name": "Get City Report",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/report/city?start=2025-01-01&end=2025-06-01",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["report", "city"],
+          "query": [
+            { "key": "start", "value": "2025-01-01" },
+            { "key": "end", "value": "2025-06-01" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Report",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/report/user/{{user_id}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["report", "user", "{{user_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Upload Transactions CSV",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/path/to/sample.csv"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/transactions/upload",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["transactions", "upload"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+user_id,city,merchant,amount,currency,category,timestamp
+u_123,NYC,Starbucks,5.50,USD,Coffee,2024-01-15T10:30:00Z
+u_456,SF,McDonald's,12.99,USD,Food,2024-01-15T11:45:00Z
+u_789,Austin,Target,45.67,USD,Shopping,2024-01-15T14:20:00Z
+u_101,Chicago,Whole Foods,78.90,USD,Groceries,2024-01-15T16:15:00Z
+u_102,Seattle,Amazon,129.99,USD,Electronics,2024-01-15T17:30:00Z
+u_103,Boston,CVS,23.45,USD,Pharmacy,2024-01-15T18:45:00Z
+u_104,Denver,REI,156.78,USD,Outdoor,2024-01-15T19:20:00Z
+u_105,Miami,Subway,8.99,USD,Food,2024-01-15T20:10:00Z
+u_106,Portland,Trader Joe's,34.67,USD,Groceries,2024-01-15T21:25:00Z
+u_107,Atlanta,Home Depot,89.99,USD,Home,2024-01-15T22:40:00Z
