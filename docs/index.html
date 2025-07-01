@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CitySpender API - Smart Transaction Analytics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>CitySpender API - Enterprise Transaction Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,11 +32,12 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -29,13 +48,16 @@
 
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -45,10 +67,13 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--white);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links {
@@ -57,35 +82,59 @@
         }
 
         .nav-links a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #f0f0f0;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
-            padding: 120px 0 80px;
+            padding: 140px 0 100px;
             text-align: center;
-            color: white;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
             font-size: 1.25rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
             animation: fadeInUp 1s ease 0.2s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-buttons {
@@ -97,9 +146,9 @@
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 16px 32px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -107,181 +156,369 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: #4f46e5;
-            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
-            background: #4338ca;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         /* Features Section */
         .features {
-            padding: 80px 0;
-            background: white;
+            padding: 100px 0;
+            background: var(--white);
+            position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1f2937;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .feature-card {
-            background: #f8fafc;
-            padding: 2rem;
-            border-radius: 12px;
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 20px;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            color: #4f46e5;
-            margin-bottom: 1rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: #1f2937;
+            color: var(--dark);
         }
 
         .feature-card p {
-            color: #6b7280;
-            line-height: 1.6;
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         /* API Section */
         .api-section {
-            padding: 80px 0;
-            background: #f8fafc;
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
 
         .endpoints {
             display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .endpoint {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #4f46e5;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 6px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .endpoint:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         .endpoint-method {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-size: 0.875rem;
-            font-weight: 600;
-            margin-right: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 80px;
+            text-align: center;
         }
 
-        .method-get { background: #dcfce7; color: #166534; }
-        .method-post { background: #dbeafe; color: #1e40af; }
+        .method-get { 
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); 
+            color: #166534; 
+        }
+        .method-post { 
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); 
+            color: #1e40af; 
+        }
+
+        .endpoint-content {
+            flex: 1;
+        }
 
         .endpoint-url {
-            font-family: 'Monaco', 'Menlo', monospace;
-            color: #4f46e5;
-            font-weight: 500;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .endpoint p {
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 16px;
+            background: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         /* Stats Section */
         .stats {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            color: white;
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="b" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="80" fill="url(%23b)"/><circle cx="900" cy="200" r="120" fill="url(%23b)"/><circle cx="300" cy="800" r="100" fill="url(%23b)"/></svg>');
+            opacity: 0.2;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            gap: 3rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .stat-item h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-item p {
             opacity: 0.9;
             font-weight: 500;
+            font-size: 1.1rem;
         }
 
         /* Footer */
         footer {
-            background: #1f2937;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
+            background: var(--darker);
+            color: var(--white);
+            padding: 60px 0 40px;
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
         }
 
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
-            color: white;
-            font-size: 1.25rem;
-            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #4f46e5;
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--gray);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -289,12 +526,17 @@
             }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
             .nav-links {
                 display: none;
             }
@@ -308,25 +550,32 @@
                 grid-template-columns: 1fr;
             }
             
-            .footer-content {
+            .endpoint {
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
     </style>
 </head>
@@ -334,11 +583,14 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#" class="logo">🚀 CitySpender</a>
+            <a href="#" class="logo">
+                <i class="fas fa-city"></i>
+                CitySpender
+            </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#api">API</a>
-                <a href="https://github.com/kyeongan/cityspender-api#readme" target="_blank">Docs</a>
+                <a href="#tech">Tech Stack</a>
                 <a href="https://github.com/kyeongan/cityspender-api" target="_blank">GitHub</a>
             </div>
         </nav>
@@ -347,8 +599,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Smart Transaction Analytics</h1>
-            <p>Powerful API for city-wide and user-specific transaction insights. Built with modern tech stack for scalability and performance.</p>
+            <h1>Enterprise Transaction Analytics API</h1>
+            <p>Transform your transaction data into actionable insights with our powerful, scalable API. Built for modern applications with TypeScript, PostgreSQL, and comprehensive testing.</p>
             <div class="cta-buttons">
                 <a href="https://github.com/kyeongan/cityspender-api" target="_blank" class="btn btn-primary">
                     <i class="fas fa-rocket"></i>
@@ -366,6 +618,7 @@
     <section class="features" id="features">
         <div class="container">
             <h2 class="section-title">Why Choose CitySpender?</h2>
+            <p class="section-subtitle">Built with enterprise-grade technologies and best practices for scalability, security, and developer experience.</p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -417,77 +670,87 @@
     <section class="api-section" id="api">
         <div class="container">
             <h2 class="section-title">API Endpoints</h2>
+            <p class="section-subtitle">Clean, RESTful API design with comprehensive documentation and examples.</p>
             <div class="endpoints">
                 <div class="endpoint">
                     <span class="endpoint-method method-get">GET</span>
-                    <span class="endpoint-url">/health</span>
-                    <p>Health check endpoint to verify API status</p>
+                    <div class="endpoint-content">
+                        <div class="endpoint-url">/health</div>
+                        <p>Health check endpoint to verify API status and system metrics</p>
+                    </div>
                 </div>
                 <div class="endpoint">
                     <span class="endpoint-method method-get">GET</span>
-                    <span class="endpoint-url">/report/city</span>
-                    <p>Get city-wide transaction summary with optional date filters</p>
+                    <div class="endpoint-content">
+                        <div class="endpoint-url">/report/city</div>
+                        <p>Get city-wide transaction summary with optional date filters and aggregation</p>
+                    </div>
                 </div>
                 <div class="endpoint">
                     <span class="endpoint-method method-get">GET</span>
-                    <span class="endpoint-url">/report/user/:user_id</span>
-                    <p>Get user-specific transaction report with merchant and category breakdowns</p>
+                    <div class="endpoint-content">
+                        <div class="endpoint-url">/report/user/:user_id</div>
+                        <p>Get user-specific transaction report with merchant and category breakdowns</p>
+                    </div>
                 </div>
                 <div class="endpoint">
                     <span class="endpoint-method method-post">POST</span>
-                    <span class="endpoint-url">/upload</span>
-                    <p>Upload transaction CSV file for data import</p>
+                    <div class="endpoint-content">
+                        <div class="endpoint-url">/upload</div>
+                        <p>Upload transaction CSV file for data import with validation and error handling</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How to Run Section -->
-    <section class="features" style="background: #f1f5f9;">
+    <!-- Tech Stack Section -->
+    <section class="tech-stack" id="tech">
         <div class="container">
-            <h2 class="section-title">How to Run Locally</h2>
-            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1f2937; margin-bottom: 1rem;">Quick Start Guide</h3>
-                <div style="display: grid; gap: 1rem; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.9rem;">
-                    <div>
-                        <strong style="color: #4f46e5;">1. Clone the repository</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            git clone https://github.com/kyeongan/cityspender-api.git
-                        </div>
+            <h2 class="section-title">Modern Tech Stack</h2>
+            <p class="section-subtitle">Built with cutting-edge technologies for performance, scalability, and developer experience.</p>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-node-js"></i>
                     </div>
-                    <div>
-                        <strong style="color: #4f46e5;">2. Install dependencies</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            npm install
-                        </div>
+                    <h4>Node.js</h4>
+                    <p>Runtime Environment</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-js"></i>
                     </div>
-                    <div>
-                        <strong style="color: #4f46e5;">3. Start PostgreSQL with Docker</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            docker-compose up -d
-                        </div>
+                    <h4>TypeScript</h4>
+                    <p>Type Safety</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-server"></i>
                     </div>
-                    <div>
-                        <strong style="color: #4f46e5;">4. Run migrations and seed data</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            npx prisma migrate dev --name init<br>
-                            npx ts-node scripts/seed.ts
-                        </div>
+                    <h4>Express.js</h4>
+                    <p>Web Framework</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
                     </div>
-                    <div>
-                        <strong style="color: #4f46e5;">5. Start the server</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            npm run dev
-                        </div>
+                    <h4>PostgreSQL</h4>
+                    <p>Database</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-magic"></i>
                     </div>
-                    <div>
-                        <strong style="color: #4f46e5;">6. Access the API</strong>
-                        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                            🌐 <a href="http://localhost:3000" target="_blank" style="color: #4f46e5;">Landing Page</a><br>
-                            📚 <a href="http://localhost:3000/docs" target="_blank" style="color: #4f46e5;">Swagger Documentation</a> (local only)<br>
-                            🧪 <a href="http://localhost:3000/health" target="_blank" style="color: #4f46e5;">Health Check</a>
-                        </div>
+                    <h4>Prisma</h4>
+                    <p>ORM</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-docker"></i>
                     </div>
+                    <h4>Docker</h4>
+                    <p>Containerization</p>
                 </div>
             </div>
         </div>
@@ -521,20 +784,38 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div>
-                    <p>&copy; 2024 CitySpender API. Built with ❤️ using modern technologies.</p>
+                <div class="footer-section">
+                    <h4>CitySpender API</h4>
+                    <p>Enterprise-grade transaction analytics API built with modern technologies for scalability and performance.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/kyeongan/cityspender-api" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#docs">
+                            <i class="fas fa-book"></i>
+                        </a>
+                        <a href="mailto:your.email@example.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://github.com/kyeongan/cityspender-api" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#docs">
-                        <i class="fas fa-book"></i>
-                    </a>
-                    <a href="">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#api">API Documentation</a></p>
+                    <p><a href="#tech">Tech Stack</a></p>
+                    <p><a href="https://github.com/kyeongan/cityspender-api">GitHub Repository</a></p>
                 </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <p>Node.js & TypeScript</p>
+                    <p>Express.js Framework</p>
+                    <p>PostgreSQL Database</p>
+                    <p>Prisma ORM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CitySpender API. Built with ❤️ using modern technologies.</p>
             </div>
         </div>
     </footer>
@@ -559,11 +840,42 @@
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.color = '#333';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.borderBottom = '1px solid rgba(0, 0, 0, 0.1)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
-                header.style.color = 'white';
+                header.style.background = 'rgba(255, 255, 255, 0.08)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
             }
+        });
+
+        // Add floating animation to feature cards
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and tech items
+        document.querySelectorAll('.feature-card, .tech-item, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
